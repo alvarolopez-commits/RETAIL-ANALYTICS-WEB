@@ -1,0 +1,5 @@
+# local / OS noise
+.DS_Store
+Thumbs.db
+desktop.ini
+__pycache__/
