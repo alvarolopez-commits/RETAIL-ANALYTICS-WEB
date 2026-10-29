@@ -67,7 +67,7 @@ Raw clips live in `../IMAGENES Y BRUTOS/` (untouched); the deck uses web copies 
 
 | Slide | Clip | Length | What happens | Text over the clip (English) | Layer (HTML, Bahasa) |
 |---|---|---|---|---|---|
-| SEARCH 1 | `00 search` → `search_01_opening` | 8 s | Café with a Mitsubishi dealership across the street; he searches, smiles and turns the phone to the camera. Opens the deck | Title card until 4.2 s: **Every review shapes your next customer.** + Google Maps logo (then the compact SEARCH tag); caption: The journey starts before the showroom. | none |
+| SEARCH 1 | `00 search` → `search_01_opening` | 8 s | Café with a Mitsubishi dealership across the street; he searches, smiles and turns the phone to the camera. Opens the deck | Title card on the right (clear of his face; stacked at the top in portrait) until 4.2 s: **Every review shapes your next customer.** + Google Maps logo (then the compact SEARCH tag); caption: The journey starts before the showroom. | none |
 | SEARCH 2 | `1-02` → `search_02_maps` | 8 s | Scrolls the dealer list | 0 s: The search begins on Google Maps. → 3.6 s: Every rating shapes a first impression. | Maps card: search → compare (4,3 / 3,6 / 3,8) at 3.6 s · **51%** card 4.4–7.7 s |
 | SEARCH 3 | `1-03` → `search_03_decision` | 8 s | Weighs it, smiles, decides | Trust influences the choice. | **74%** card 0.8–5.0 s · Maps card: compare → chosen dealer at 5.4 s |
 | SEARCH 4 | `1-04` → `search_04_visit` | 8 s | Walks up to the showroom | 0 s: Reputation influences where customers go. → 5.2 s: Every visit can leave a review. | Two reviews appear at 5.5 s |

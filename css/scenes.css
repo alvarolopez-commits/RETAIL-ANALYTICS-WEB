@@ -51,6 +51,14 @@ html[lang="id"] .act-title h2.long { font-size: calc(var(--u) * 5.2); }
 .s-act.active[data-state="0"] .act-title > :nth-child(2) { transition-delay: .4s; }
 .s-act.active[data-state="0"] .act-title > :nth-child(3) { transition-delay: .6s; }
 .act-title.has-long { top: calc(var(--u) * 3.4); }
+/* landscape: the opening title card sits on the right (over the dealership), clear of the customer's face */
+@media (min-aspect-ratio: 5/4) {
+  .act-title.has-long { left: auto; right: var(--px); top: calc(var(--u) * 5); width: calc(var(--u) * 41); }
+  .act-title.has-long h2.long { font-size: calc(var(--u) * 4.6); max-width: none; }
+  html[lang="id"] .act-title.has-long h2.long { font-size: calc(var(--u) * 3.9); }
+  .act-title.has-long p { max-width: none; }
+  #scene-search .beat[data-id="search-01"] .shade { background: linear-gradient(270deg, rgba(7, 13, 29, .84) 0%, rgba(7, 13, 29, .5) 34%, rgba(7, 13, 29, 0) 62%), linear-gradient(0deg, rgba(7, 13, 29, .9) 0%, rgba(7, 13, 29, .3) 26%, rgba(7, 13, 29, 0) 46%), linear-gradient(180deg, rgba(7, 13, 29, .45) 0%, rgba(7, 13, 29, 0) 20%); }
+}
 /* timed title card (SEARCH): fades away and hands over to the compact tag */
 .s-act.active[data-state="0"].title-off .act-title > * { opacity: 0; transform: translateY(calc(var(--u) * -.8)); transition: opacity .7s var(--e), transform .8s var(--e); transition-delay: 0s; }
 .s-act[data-state="0"].title-off .act-tag { opacity: 1; transform: none; }
@@ -159,8 +167,10 @@ html[lang="id"] .act-title h2.long { font-size: calc(var(--u) * 5.2); }
 @media (max-aspect-ratio: 5/4) {
   .act-title { top: calc(var(--u) * 7); }
   .act-title h2 { font-size: calc(var(--u) * 11.5); }
-  .act-title h2.long { font-size: calc(var(--u) * 6.6); }
-  html[lang="id"] .act-title h2.long { font-size: calc(var(--u) * 5.6); }
+  .act-title.has-long { top: calc(var(--u) * 4.5); }
+  .act-title h2.long { font-size: calc(var(--u) * 5.4); }
+  .act-title.has-long p { font-size: calc(var(--u) * 2.1); margin-top: calc(var(--u) * .9); }
+  html[lang="id"] .act-title h2.long { font-size: calc(var(--u) * 4.7); }
   .gm-chip img { height: calc(var(--u) * 3.6); }
   .act-title p { font-size: calc(var(--u) * 2.6); }
   .cap { font-size: calc(var(--u) * 4.2); }
