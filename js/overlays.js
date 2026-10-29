@@ -76,6 +76,17 @@
             <span class="stars" style="--p:${pct(v.stars)}%" aria-label="${v.stars} of 5">★★★★★</span><p>${esc(v.text)}</p></div>`).join('')}</div>`;
     },
 
+    /* Research figure (CDK / BrightLocal): compact HTML card above the video, never baked into the MP4. */
+    evidence(o) {
+      const k = o.id, e = RA.C.evidence[k];
+      return `<div class="ev-wrap" role="note"><div class="ev">
+          <span class="ev-l" data-t="evidence.${k}.label">${esc(e.label)}</span>
+          <b class="ev-n num">${esc(e.value)}</b>
+          <p class="ev-c" data-t="evidence.${k}.text">${esc(e.text)}</p>
+          <p class="ev-s" data-t="evidence.${k}.source">${esc(e.source)}</p>
+        </div></div>`;
+    },
+
     bridge() {
       return `<div class="br-wrap"><button class="cta" data-go="improve"><span data-t="ui.openDashboard">${esc(RA.C.ui.openDashboard)}</span>
         <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button></div>`;
@@ -84,8 +95,11 @@
 
   /* `at` (ms into the slide) makes the whole layer appear at that moment instead of with the beat. */
   RA.overlayHTML = function (ov) {
-    if (!ov || !T[ov.type]) return '';
+    if (!ov) return '';
+    if (Array.isArray(ov)) return ov.map(RA.overlayHTML).join('');          // several layers on one slide
+    if (!T[ov.type]) return '';
     const html = T[ov.type](ov);
-    return ov.at != null ? html.replace(/^(\s*)<div /, `$1<div data-at="${ov.at}" `) : html;
+    const attrs = (ov.at != null ? ` data-at="${ov.at}"` : '') + (ov.until != null ? ` data-until="${ov.until}"` : '');
+    return attrs ? html.replace(/^(\s*)<div /, `$1<div${attrs} `) : html;     // `until` fades the layer out again
   };
 })();

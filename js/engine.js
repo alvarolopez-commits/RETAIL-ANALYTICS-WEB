@@ -8,7 +8,7 @@
 
 
   /* ── scenes ── */
-  const ORDER = ['intro', 'search', 'respond', 'improve', 'repeat', 'end'];
+  const ORDER = ['search', 'understand', 'methodology', 'respond', 'improve', 'repeat', 'end'];   // the deck opens on SEARCH; 'end' belongs to REPEAT
   const scenes = {};
   ORDER.forEach(id => { scenes[id] = { id, el: $('scene-' + id), count: 1, ctrl: null }; });
 
@@ -17,8 +17,10 @@
   });
   RA.buildLoop();
   RA.improve.init();
-  Object.assign(scenes.improve, { ctrl: RA.improve.ctrl(), stepped: true });   // one state per dashboard view
-  scenes.improve.count = scenes.improve.ctrl.count;
+  /* Stepped scenes: one state per dashboard view / matrix mode / methodology stage (no clip timers). */
+  [['improve', RA.improve], ['understand', RA.ecosystem], ['methodology', RA.methodology]].forEach(([id, mod]) => {
+    const c = mod.ctrl(); Object.assign(scenes[id], { ctrl: c, stepped: true, count: c.count });
+  });
 
   /* ── state ── */
   let cur = null, idx = 0, auto = !!(C.autoplay && C.autoplay.defaultOn), autoTimer = 0, lockUntil = 0, busy = false;
@@ -33,7 +35,7 @@
     stage.dataset.scene = cur;
     const chapCur = cur === 'end' ? 'repeat' : cur;   // the end card belongs to the closing chapter
     nav.querySelectorAll('[data-chap]').forEach(b => b.classList.toggle('on', b.dataset.chap === chapCur));
-    nav.querySelector('.brand').classList.toggle('on', cur === 'intro');
+    const on = nav.querySelector('.chap [data-chap].on'); if (on && on.scrollIntoView && nav.querySelector('.chap').scrollWidth > nav.querySelector('.chap').clientWidth) on.scrollIntoView({ inline: 'center', block: 'nearest' });
 
 
     $('beats').style.setProperty('--d', (s.isAct ? s.ctrl.nominal(idx) : 0) + 'ms');
@@ -43,12 +45,12 @@
       : '';
 
     $('progress').style.width = ((flatPos() + 1) / flat() * 100) + '%';
-    $('prev').disabled = cur === 'intro' && idx === 0;
+    $('prev').disabled = cur === ORDER[0] && idx === 0;
     $('next').disabled = cur === 'end';
     $('play').disabled = !s.isAct;   // keeps its place (no layout shift); only visible inside the acts
 
     const live = $('live');
-    live.textContent = s.ctrl ? s.ctrl.label(idx) : ({ intro: C.intro.headline, improve: C.acts[2].title + '. ' + C.acts[2].subtitle, repeat: C.closing.headline, end: C.end.lead + ' ' + C.end.em }[cur] || '');
+    live.textContent = s.ctrl ? s.ctrl.label(idx) : ({ repeat: C.closing.headline, end: C.end.lead + ' ' + C.end.em }[cur] || '');
 
     try { history.replaceState(null, '', '#' + cur + (s.count > 1 && idx ? '/' + (idx + 1) : '')); } catch (e) { /* file:// quirks */ }
   }
@@ -79,9 +81,9 @@
     const s = scenes[id]; if (!s) return;
     i = Math.max(0, Math.min(i == null ? 0 : i, s.count - 1));
     if (cur === id && i === idx) return;
-    const crossAct = cur && cur !== id && scenes[cur].isAct && s.isAct;   // SEARCH ⇄ RESPOND: crisp separation
-    const zoom = cur === 'respond' && id === 'improve';
-    if (crossAct && !RA.reducedMotion()) {
+    const zoom = cur === 'respond' && id === 'improve';                   // the laptop zoom keeps its own transition
+    const dip = cur && cur !== id && (scenes[cur].isAct || s.isAct) && !zoom;   // video ⇄ any other scene: dip to ink, never two videos cross-fading
+    if (dip && !RA.reducedMotion()) {
       busy = true; const v = $('veil'); v.classList.add('on');
       // behind the dip to ink the scenes swap with a hard cut: cross-fading two scenes full of video is what stutters
       setTimeout(() => {
@@ -145,7 +147,7 @@
   $('next').addEventListener('click', e => { e.stopPropagation(); clearAuto(); next(); if (e.detail > 0) e.currentTarget.blur(); });
   $('prev').addEventListener('click', e => { e.stopPropagation(); clearAuto(); prev(); if (e.detail > 0) e.currentTarget.blur(); });
   $('play').addEventListener('click', e => { e.stopPropagation(); setAuto(!auto); if (e.detail > 0) e.currentTarget.blur(); });
-  // CTAs inside scenes (intro, bridge, closing)
+  // CTAs inside scenes (bridge, closing)
   $('scenes').addEventListener('click', e => {
     const b = e.target.closest('[data-go]'); if (!b) return;
     e.stopPropagation(); clearAuto(); show(b.dataset.go, 0); if (e.detail > 0) b.blur();
@@ -192,13 +194,14 @@
         clearAuto(); if (!tooSoon()) next(); break;
       case 'f': case 'F': e.preventDefault(); toggleFs(); break;
       case 'p': case 'P': if (scenes[cur].isAct) { e.preventDefault(); setAuto(!auto); } break;
-      case 'Home': e.preventDefault(); RA.go('intro'); break;
+      case 'Home': e.preventDefault(); RA.go('search'); break;
       case '1': RA.go('search'); break;
-      case '2': RA.go('respond'); break;
-      case '3': RA.go('improve'); break;
-      case '4': RA.go('repeat'); break;
-      case '5': RA.go('end'); break;
-      case '0': RA.go('intro'); break;
+      case '2': RA.go('understand'); break;
+      case '3': RA.go('methodology'); break;
+      case '4': RA.go('respond'); break;
+      case '5': RA.go('improve'); break;
+      case '6': RA.go('repeat'); break;
+      case '0': RA.go('search'); break;
       case 'l': case 'L': RA.setLang(RA.lang() === 'en' ? 'id' : 'en'); break;
     }
   });
@@ -220,7 +223,7 @@
   function fromHash() {
     const m = location.hash.replace('#', '').match(/^([a-z]+)(?:\/(\d+))?$/);
     if (m && scenes[m[1]]) return [m[1], m[2] ? +m[2] - 1 : 0];
-    return ['intro', 0];
+    return ['search', 0];
   }
   window.addEventListener('hashchange', () => { const [id, i] = fromHash(); if (id !== cur || (scenes[id].count > 1 && i !== idx)) { clearAuto(); show(id, i); } });
 

@@ -30,8 +30,9 @@
     root.innerHTML = states.map(beatHTML).join('') + `
       <div class="act-tag"><b class="t">${esc(act.title)}</b><span class="st" data-t="acts.${ai}.subtitle">${esc(act.subtitle)}</span></div>
       <div class="act-title">
-        <h2>${esc(act.title)}</h2>
+        ${act.heading ? `<h2 class="long" data-t="acts.${ai}.heading">${esc(act.heading)}</h2>` : `<h2>${esc(act.title)}</h2>`}
         <p data-t="acts.${ai}.subtitle">${esc(act.subtitle)}</p>
+        ${act.badge ? `<span class="gm-chip"><img src="${act.badge.src}" alt="${esc(act.badge.alt)}" decoding="async"></span>` : ''}
       </div>`;
 
     const beatEls = [...root.querySelectorAll('.beat')];
@@ -53,10 +54,15 @@
       m.hooks.start = t0 => {
         reset();
         const run = (at, fn) => (at <= t0 ? fn() : timers.push(setTimeout(fn, at - t0)));
-        items.forEach(n => run(+n.dataset.at || 0, () => {
-          if (n.classList.contains('ci')) { n.parentNode.querySelectorAll('.ci.on').forEach(o => o.classList.remove('on')); n.classList.add('on'); }
-          else n.classList.add('in');
-        }));
+        items.forEach(n => {
+          const at = +n.dataset.at || 0, until = n.dataset.until ? +n.dataset.until : Infinity;
+          if (t0 >= until) return;                                   // already past its window (clip started late / seeked)
+          run(at, () => {
+            if (n.classList.contains('ci')) { n.parentNode.querySelectorAll('.ci.on').forEach(o => o.classList.remove('on')); n.classList.add('on'); }
+            else n.classList.add('in');
+          });
+          if (until !== Infinity) run(until, () => n.classList.remove('in'));   // layers with a window fade out on their own
+        });
         maps.forEach(n => JSON.parse(n.dataset.switch).forEach(sw => run(sw.at, () => setMode(n, sw.mode))));
       };
     });

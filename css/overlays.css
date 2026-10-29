@@ -15,6 +15,14 @@
   overflow: hidden; font-feature-settings: 'tnum';
 }
 
+/* ───── Research evidence (SEARCH): compact card above the video. Translucent, no blur: it sits on moving video. ───── */
+.ev-wrap { position: absolute; right: var(--px); bottom: var(--pb); width: calc(var(--u) * 27); transform: translateY(calc(var(--u) * 1.4)); transition-duration: .6s, .8s !important; }
+.ev { padding: calc(var(--u) * 1.5) calc(var(--u) * 1.7); border-radius: calc(var(--u) * 1.4); background: rgba(8, 16, 34, .86); box-shadow: inset 0 0 0 1px var(--edge-hi), inset 0 1px 0 rgba(255, 255, 255, .12), 0 24px 60px -24px rgba(0, 0, 0, .8); }
+.ev-l { display: block; font-size: max(11px, calc(var(--u) * .78)); font-weight: 700; letter-spacing: .22em; color: var(--sky); }
+.ev-n { display: block; margin: .18em 0 .08em; font-family: var(--fn); font-weight: 600; font-size: calc(var(--u) * 6.2); line-height: 1; letter-spacing: -.03em; color: #fff; }
+.ev-c { font-size: calc(var(--u) * 1.15); line-height: 1.4; color: var(--t1); }
+.ev-s { margin-top: calc(var(--u) * .9); padding-top: calc(var(--u) * .8); border-top: 1px solid var(--edge); font-size: max(11px, calc(var(--u) * .76)); line-height: 1.35; color: var(--t3); }
+
 /* ───── Maps card ───── */
 .mc { width: calc(var(--u) * 22.5); }
 .mc-wrap { position: absolute; left: var(--px); top: calc(var(--u) * 6.2); transform: translateY(calc(var(--u) * 1.6)); }
@@ -142,6 +150,8 @@
 .md-shot img { display: block; width: min(calc(100vw - var(--px) * 2), calc((100vh - var(--u) * 9) * 1.82)); height: auto; }
 
 @media (max-aspect-ratio: 5/4) {
+  .ev-wrap { left: var(--px); right: var(--px); width: auto; bottom: calc(var(--pb) + var(--u) * 11); }
+  .ev-n { font-size: calc(var(--u) * 7); } .ev-c { font-size: calc(var(--u) * 1.9); } .ev-l, .ev-s { font-size: max(11px, calc(var(--u) * 1.4)); }
   .mc { width: calc(var(--u) * 46); border-radius: calc(var(--u) * 3); }
   .mc-search { font-size: calc(var(--u) * 1.9); } .mc-chips { font-size: calc(var(--u) * 1.4); }
   .mc-map { height: calc(var(--u) * 13); } .mc-name { font-size: calc(var(--u) * 1.9); } .mc-sub { font-size: calc(var(--u) * 1.4); }

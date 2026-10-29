@@ -12,7 +12,7 @@
    double-clicking index.html (file://).
    ========================================================================== */
 window.RA_CONTENT = {
-  version: '0.1',
+  version: '0.2',
   product: 'Retail Analytics',
   byline: 'By Astara Intelligence',
 
@@ -25,13 +25,108 @@ window.RA_CONTENT = {
   /* Beat auto-play toggle in the nav bar (never crosses from one ACT to the next). */
   autoplay: { defaultOn: false },
 
-  intro: {
-    id: 'intro',
-    eyebrow: 'Retail Analytics',
-    byline: 'By Astara Intelligence',
-    headline: 'Every review shapes your next customer.',
-    subtitle: 'Turn customer feedback into smarter retail decisions.',
-    cta: 'Explore the story'
+  /* ─────────── v0.2 · Research evidence shown inside SEARCH (HTML cards above the videos) ───────────
+     Scope is part of the claim: both figures come from US surveys. Neither describes Indonesia or Google Maps use alone.
+     Sources: CDK chart (p. 8) https://impel.ai/wp-content/uploads/2025/11/CDK_2025-service-shopper-study.pdf
+              BrightLocal       https://www.brightlocal.com/research/local-consumer-review-survey/               */
+  evidence: {
+    cdk: {
+      value: '51%',
+      label: 'AUTOMOTIVE SERVICE',
+      text: 'Consider online reviews important when choosing an automotive service provider.',
+      source: 'CDK Global · Service Shopper Study 2025 · United States'
+    },
+    brightlocal: {
+      value: '74%',
+      label: 'REVIEW RECENCY',
+      text: 'Seek local-business reviews written within the last three months.',
+      source: 'BrightLocal · Local Consumer Review Survey 2026 · United States'
+    }
+  },
+
+  /* ─────────── v0.2 · UNDERSTAND: two-axis ecosystem matrix (qualitative, not measured) ───────────
+     x / y are CATEGORIES (vl vl … vh); px / py only place the dot inside its category band (0–100, py from the bottom).
+     Google Maps Reviews moves horizontally only: pxEnhanced replaces px, py never changes. */
+  understand: {
+    title: 'Understanding the Retail Performance Ecosystem',
+    subline: 'Internal feedback helps improve the experience. Public feedback also shapes the choices of future customers.',
+    axisX: 'Operational Actionability',
+    axisY: 'Influence on Future Customers',
+    low: 'Low',
+    high: 'High',
+    assessment: 'Qualitative assessment by Astara Intelligence',
+    levels: { vl: 'Very low', l: 'Low', m: 'Medium', h: 'High', vh: 'Very high', hvh: 'High to very high' },
+    sources: [
+      { id: 'csi',     label: 'CSI / SSI / NPS',                x: 'vh', y: 'vl', px: 90, py: 17, side: 'left' },
+      { id: 'crm',     label: 'CRM / DMS',                      x: 'vh', y: 'vl', px: 90, py: 7,  side: 'left' },
+      { id: 'mystery', label: 'Mystery Shopping',               x: 'h',  y: 'vl', px: 70, py: 11, side: 'left' },
+      { id: 'contact', label: 'Contact Center / Complaints',    x: 'h',  y: 'l',  px: 70, py: 28, side: 'left' },
+      { id: 'social',  label: 'Social Media / Public Comments', x: 'm',  y: 'h',  px: 50, py: 64, side: 'right' },
+      { id: 'google',  label: 'Google Maps Reviews',            x: 'm',  y: 'vh', px: 50, py: 84, pxEnhanced: 80, xEnhanced: 'hvh', side: 'top' }
+    ],
+    modes: [
+      {
+        label: 'RAW GOOGLE REVIEWS',
+        claim: 'Powerful public influence. Limited structure.',
+        text: 'Public ratings and comments are highly visible, but not yet comparable or systematically actionable across the retail network.',
+        chips: ['Highly visible', 'Unstructured', 'Not comparable']
+      },
+      {
+        label: 'GOOGLE REVIEWS + ASTARA INTELLIGENCE',
+        claim: 'Public influence. Operational intelligence.',
+        text: 'The same public voice, now classified by topic, benchmarked across dealers and tracked over time, so teams can act on it.',
+        chips: ['Classification', 'Benchmarking', 'Alerts', 'Dealer tracking']
+      }
+    ],
+    enhancedTag: '+ Astara Intelligence',
+    footer: "Internal feedback helps Mitsubishi improve today's experience. Public feedback can also influence tomorrow's customers."
+  },
+
+  /* ─────────── v0.2 · METHODOLOGY: four stages around one illustrative review ───────────
+     No numeric examples on purpose: the eNPS and Satisfaction Index formulas are the product's own and are not restated here. */
+  methodology: {
+    title: 'From Reviews to Retail Intelligence',
+    subline: 'One review. Multiple insights. A clear path from customer voice to better retail decisions.',
+    steps: [
+      { id: 'collect',  label: 'COLLECT',  short: 'Capture the review',
+        title: 'Capture every Google Maps review',
+        text: 'Each review arrives with its original text, its star rating, the dealer and the date, and its Sales or After Sales context when available.',
+        tags: ['Original text', 'Star rating', 'Dealer', 'Date', 'Sales / After Sales'] },
+      { id: 'classify', label: 'CLASSIFY', short: 'Split and tag',
+        title: 'Split one review into separate opinions',
+        text: 'The review is assigned to Sales or After Sales, then divided into fragments. Each fragment is classified by sentiment and by topic.',
+        tags: ['Sales vs After Sales', 'Positive / negative', 'Topic taxonomy'] },
+      { id: 'measure',  label: 'MEASURE',  short: 'Make it comparable',
+        title: 'Turn opinions into comparable performance data',
+        text: 'Stars feed the Google rating and the eNPS, which is based on the distribution of star ratings (it is not a survey NPS). Classified fragments feed the Satisfaction Index by topic.',
+        tags: ['Google rating', 'eNPS', 'Satisfaction Index', 'Thematic drivers', 'Brand · dealer · time'] },
+      { id: 'act',      label: 'ACT',      short: 'Move to action',
+        title: 'From information to operational action',
+        text: 'Teams receive it where they work: an interactive dashboard, a daily email alert and periodic reporting. The follow-up itself happens outside the tool.',
+        tags: ['Dashboard', 'Daily email alert', 'Reporting'] }
+    ],
+    review: {
+      source: 'Google Maps review',
+      dealer: 'Mitsubishi Dealer A',
+      date: '27/10/2026',
+      stars: 4,
+      context: 'After Sales',
+      parts: [
+        { t: 'My car was serviced on a weekday morning. ' },
+        { f: 'pos', t: 'The staff were very friendly' },
+        { t: ' and explained everything. ' },
+        { f: 'neg', t: 'I waited nearly two hours for my car' },
+        { t: ', though.' }
+      ],
+      topics: { pos: 'Staff & Service Quality', neg: 'Waiting Time' },
+      sentiments: { pos: 'Positive', neg: 'Negative' }
+    },
+    flow: { stars: 'Stars', fragments: 'Fragments', rating: 'Google rating · eNPS', index: 'Satisfaction Index by topic' },
+    outputs: [
+      { id: 'dashboard', label: 'Dashboard', text: 'Interactive dashboard to explore, compare and track.' },
+      { id: 'alerts',    label: 'Alerts',    text: 'Daily email summary of new negative reviews.' },
+      { id: 'reporting', label: 'Reporting', text: 'Periodic reporting for dealers and brand teams.' }
+    ]
   },
 
   acts: [
@@ -42,7 +137,9 @@ window.RA_CONTENT = {
       id: 'search',
       act: 1,
       title: 'SEARCH',
+      heading: 'Every review shapes your next customer.',
       subtitle: 'Customers discover dealers on Google Maps.',
+      badge: { src: 'assets/logos/google-maps.png', alt: 'Google Maps' },   // shown on the opening title card (logo as supplied, on white)
       beats: [
         {
           id: 'search-01', name: 'The moment',
@@ -64,7 +161,10 @@ window.RA_CONTENT = {
             { at: 3600, text: 'Every rating shapes a first impression.' }
           ],
           kb: { x: 1.2, y: -0.4 },
-          overlay: { type: 'maps', mode: 'search', at: 700, switch: [{ at: 3600, mode: 'compare' }] }
+          overlay: [
+            { type: 'maps', mode: 'search', at: 700, switch: [{ at: 3600, mode: 'compare' }] },
+            { type: 'evidence', id: 'cdk', at: 4400, until: 7700 }          // 51% once the ratings are readable
+          ]
         },
         {
           id: 'search-03', name: 'The decision',
@@ -74,7 +174,10 @@ window.RA_CONTENT = {
           duration: 8000,
           captions: [{ at: 0, text: 'Trust influences the choice.' }],
           kb: { x: -1, y: -0.6 },
-          overlay: { type: 'maps', mode: 'compare', at: 500, switch: [{ at: 3800, mode: 'select' }] }
+          overlay: [
+            { type: 'maps', mode: 'compare', at: 500, switch: [{ at: 5400, mode: 'select' }] },
+            { type: 'evidence', id: 'brightlocal', at: 800, until: 5000 }   // 74% while he weighs the options, gone before the chosen-dealer callout
+          ]
         },
         {
           id: 'search-04', name: 'The visit',

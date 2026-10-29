@@ -1,26 +1,3 @@
-/* ───────────── INTRO ───────────── */
-.s-intro { display: flex; align-items: center; padding: 0 var(--px) var(--pb); }
-.intro-inner { max-width: calc(var(--u) * 72); display: flex; flex-direction: column; align-items: flex-start; }
-.lockup { display: flex; align-items: center; gap: calc(var(--u) * 2); margin-bottom: calc(var(--u) * 3.6); font-size: calc(var(--u) * 1); }
-.ra-logo { position: relative; width: calc(var(--u) * 6.6); height: calc(var(--u) * 6.6); flex: none; border-radius: 24%; overflow: hidden; box-shadow: 0 20px 70px -18px rgba(139, 205, 255, .5); }
-.ra-logo img { width: 100%; height: 100%; display: block; }
-.ra-logo .sweep { position: absolute; inset: 0; background: linear-gradient(115deg, transparent 38%, rgba(255, 255, 255, .5) 50%, transparent 62%); transform: translateX(-130%); animation: sweep 4.5s var(--e) 1.4s infinite; }
-@keyframes sweep { 0%, 55% { transform: translateX(-130%); } 85%, 100% { transform: translateX(130%); } }
-.lk-txt { display: flex; flex-direction: column; gap: calc(var(--u) * .9); }
-.lk-name { font-size: 2.15em; font-weight: 300; letter-spacing: .34em; text-transform: uppercase; color: var(--t1); line-height: 1; }
-.lk-by { display: flex; align-items: center; gap: .9em; font-size: .86em; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--t3); }
-.lk-by img { height: 1.5em; width: auto; }
-.intro-h { text-wrap: balance; font-weight: 300; font-size: calc(var(--u) * 5.9); line-height: 1.06; letter-spacing: -.022em; color: var(--t1); margin-bottom: calc(var(--u) * 1.8); max-width: 15em; }
-.intro-sub { font-size: calc(var(--u) * 1.75); line-height: 1.45; color: var(--t2); font-weight: 400; margin-bottom: calc(var(--u) * 3.6); max-width: 28em; }
-
-.s-intro .lockup, .s-intro .intro-h, .s-intro .intro-sub, .s-intro .cta, .s-intro .s-intro.active .lockup { opacity: 1; transform: none; transition-delay: .15s; }
-.s-intro.active .intro-h { opacity: 1; transform: none; transition-delay: .35s; }
-.s-intro.active .intro-sub { opacity: 1; transform: none; transition-delay: .6s; }
-.s-intro.active .cta { opacity: 1; transform: none; transition-delay: .85s; }
-.s-intro.active .s-intro.active .cta:hover { transform: translateY(-2px); transition-delay: 0s; transition-duration: .3s; }
-
-html[lang="id"] .intro-h { font-size: calc(var(--u) * 5); }   /* longer sentence in Bahasa: keep it on two lines */
-
 /* ───────────── ACT scenes (SEARCH / RESPOND) ───────────── */
 .s-act { background: var(--ink); }
 .beat { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity 1.1s var(--e), visibility 0s linear 1.1s; }
@@ -62,6 +39,10 @@ html[lang="id"] .intro-h { font-size: calc(var(--u) * 5); }   /* longer sentence
 
 /* Act title card (beat 1) */
 .act-title { position: absolute; left: var(--px); top: calc(var(--u) * 6.4); z-index: 6; pointer-events: none; }
+.act-title h2.long { font-size: calc(var(--u) * 6.2); line-height: 1.02; font-weight: 300; letter-spacing: -.025em; max-width: 12.5em; text-wrap: balance; }
+html[lang="id"] .act-title h2.long { font-size: calc(var(--u) * 5.2); }
+.gm-chip { display: inline-flex; align-items: center; margin-top: calc(var(--u) * 1.6); padding: calc(var(--u) * .7) calc(var(--u) * 1.4); border-radius: 999px; background: #fff; box-shadow: 0 10px 40px -14px rgba(0, 0, 0, .7); }
+.gm-chip img { display: block; height: calc(var(--u) * 2.1); width: auto; }
 .act-title h2 { font-size: calc(var(--u) * 9.2); line-height: .95; font-weight: 300; letter-spacing: .015em; color: var(--t1); text-shadow: 0 4px 60px rgba(0, 0, 0, .35); }
 .act-title p { margin-top: calc(var(--u) * 1.3); font-size: calc(var(--u) * 1.9); font-weight: 400; color: rgba(244, 248, 255, .92); max-width: 22em; line-height: 1.3; }
 .act-title > * { opacity: 0; transform: translateY(calc(var(--u) * 1.4)); transition: opacity .9s var(--eo), transform 1.2s var(--eo); }
@@ -172,12 +153,11 @@ html[lang="id"] .intro-h { font-size: calc(var(--u) * 5); }   /* longer sentence
 
 /* ───────────── Portrait / narrow ───────────── */
 @media (max-aspect-ratio: 5/4) {
-    .s-intro { align-items: flex-end; }
-  .intro-h { font-size: calc(var(--u) * 7.4); }
-  .intro-sub { font-size: calc(var(--u) * 2.2); }
-  .lk-name { font-size: 2.1em; }
   .act-title { top: calc(var(--u) * 7); }
   .act-title h2 { font-size: calc(var(--u) * 11.5); }
+  .act-title h2.long { font-size: calc(var(--u) * 6.6); }
+  html[lang="id"] .act-title h2.long { font-size: calc(var(--u) * 5.6); }
+  .gm-chip img { height: calc(var(--u) * 3.6); }
   .act-title p { font-size: calc(var(--u) * 2.6); }
   .cap { font-size: calc(var(--u) * 4.2); }
   .copy { max-width: calc(100% - var(--px) * 2); }
@@ -213,13 +193,11 @@ html[lang="id"] .intro-h { font-size: calc(var(--u) * 5); }   /* longer sentence
 /* ───────────── Backgrounds: the PCI deck's recipe (silk image full bleed + its dark gradients for the text) ───────────── */
 .bgfx { position: absolute; inset: 0; z-index: 0; pointer-events: none; background-repeat: no-repeat; background-size: cover; background-position: center; opacity: 0; transition: opacity 1.6s var(--e); }
 .scene.active .bgfx { opacity: 1; }
-.s-intro > :not(.bgfx), .s-repeat > :not(.bgfx), .s-improve > :not(.bgfx) { position: relative; z-index: 1; }
-.s-intro .bgfx { background-image: linear-gradient(90deg, rgba(3, 6, 15, .86) 0%, rgba(3, 6, 15, .35) 46%, rgba(3, 6, 15, 0) 100%), linear-gradient(0deg, rgba(3, 6, 15, .7), rgba(3, 6, 15, 0) 40%), url(../assets/images/bg/flow-01.webp); }
+.s-repeat > :not(.bgfx), .s-improve > :not(.bgfx) { position: relative; z-index: 1; }
 .s-repeat .bgfx { background-image: linear-gradient(90deg, rgba(3, 6, 15, .82) 0%, rgba(3, 6, 15, .45) 40%, rgba(3, 6, 15, .12) 100%), url(../assets/images/bg/flow-02.webp); }
 .s-improve .bgfx { background-image: linear-gradient(180deg, rgba(3, 6, 15, .85) 0%, rgba(3, 6, 15, .55) 38%, rgba(3, 6, 15, .8) 100%), url(../assets/images/bg/flow-03.webp); }
 @media (max-aspect-ratio: 5/4) {
-  .s-intro .bgfx { background-image: linear-gradient(180deg, rgba(3, 6, 15, .35), rgba(3, 6, 15, .75)), url(../assets/images/bg/flow-01.webp); }
-  .s-repeat .bgfx { background-image: linear-gradient(180deg, rgba(3, 6, 15, .8) 0%, rgba(3, 6, 15, .45) 45%, rgba(3, 6, 15, .6)), url(../assets/images/bg/flow-02.webp); }
+    .s-repeat .bgfx { background-image: linear-gradient(180deg, rgba(3, 6, 15, .8) 0%, rgba(3, 6, 15, .45) 45%, rgba(3, 6, 15, .6)), url(../assets/images/bg/flow-02.webp); }
 }
 
 .rp-brand { display: flex; align-items: center; gap: calc(var(--u) * 1); margin-bottom: calc(var(--u) * 2.2); font-size: max(11px, calc(var(--u) * .78)); letter-spacing: .24em; text-transform: uppercase; color: var(--t3); font-weight: 600; }
