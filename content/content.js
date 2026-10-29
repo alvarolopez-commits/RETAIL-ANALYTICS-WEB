@@ -140,15 +140,16 @@ window.RA_CONTENT = {
       act: 1,
       title: 'SEARCH',
       heading: 'Every review shapes your next customer.',
+      titleUntil: 4200,   // ms: the opening title card leaves before the customer lifts his head to the camera
       subtitle: 'Customers discover dealers on Google Maps.',
       badge: { src: 'assets/logos/google-maps.png', alt: 'Google Maps' },   // shown on the opening title card (logo as supplied, on white)
       beats: [
         {
           id: 'search-01', name: 'The moment',
-          still: 'assets/images/posters/search_01_moment.jpg',
-          alt: 'A customer in a South Jakarta café picks up his phone to look for a car dealer.',
-          videoSrc: 'assets/videos/act-01/search_01_moment.mp4',
-          duration: 5000,
+          still: 'assets/images/posters/search_01_opening.jpg',
+          alt: 'A customer in a South Jakarta café, a Mitsubishi dealership across the street, searches on his phone and turns it to the camera.',
+          videoSrc: 'assets/videos/act-01/search_01_opening.mp4',
+          duration: 8000,
           captions: [{ at: 0, text: 'The journey starts before the showroom.' }],
           kb: { x: -1.2, y: 0.4 }
         },

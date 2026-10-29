@@ -29,7 +29,7 @@
 
     root.innerHTML = states.map(beatHTML).join('') + `
       <div class="act-tag"><b class="t">${esc(act.title)}</b><span class="st" data-t="acts.${ai}.subtitle">${esc(act.subtitle)}</span></div>
-      <div class="act-title">
+      <div class="act-title${act.heading ? ' has-long' : ''}">
         ${act.heading ? `<h2 class="long" data-t="acts.${ai}.heading">${esc(act.heading)}</h2>` : `<h2>${esc(act.title)}</h2>`}
         <p data-t="acts.${ai}.subtitle">${esc(act.subtitle)}</p>
         ${act.badge ? `<span class="gm-chip"><img src="${act.badge.src}" alt="${esc(act.badge.alt)}" decoding="async"></span>` : ''}
@@ -50,9 +50,10 @@
         el.querySelectorAll('.ci.on, .ov > [data-at].in').forEach(n => n.classList.remove('on', 'in'));
         maps.forEach(n => setMode(n, n.dataset.mode0));
       };
-      m.hooks.stop = reset;
+      m.hooks.stop = () => { reset(); root.classList.remove('title-off'); };
       m.hooks.start = t0 => {
-        reset();
+        reset(); root.classList.remove('title-off');
+        if (i === 0 && act.titleUntil) { if (t0 >= act.titleUntil) root.classList.add('title-off'); else timers.push(setTimeout(() => root.classList.add('title-off'), act.titleUntil - t0)); }
         const run = (at, fn) => (at <= t0 ? fn() : timers.push(setTimeout(fn, at - t0)));
         items.forEach(n => {
           const at = +n.dataset.at || 0, until = n.dataset.until ? +n.dataset.until : Infinity;

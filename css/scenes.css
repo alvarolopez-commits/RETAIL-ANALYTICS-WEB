@@ -50,6 +50,10 @@ html[lang="id"] .act-title h2.long { font-size: calc(var(--u) * 5.2); }
 .s-act.active[data-state="0"] .act-title > :nth-child(1) { transition-delay: .25s; }
 .s-act.active[data-state="0"] .act-title > :nth-child(2) { transition-delay: .4s; }
 .s-act.active[data-state="0"] .act-title > :nth-child(3) { transition-delay: .6s; }
+.act-title.has-long { top: calc(var(--u) * 3.4); }
+/* timed title card (SEARCH): fades away and hands over to the compact tag */
+.s-act.active[data-state="0"].title-off .act-title > * { opacity: 0; transform: translateY(calc(var(--u) * -.8)); transition: opacity .7s var(--e), transform .8s var(--e); transition-delay: 0s; }
+.s-act[data-state="0"].title-off .act-tag { opacity: 1; transform: none; }
 
 /* In state 0 the caption drops under the big title block */
 .s-act[data-state="0"] .beat:first-of-type .copy { bottom: var(--pb); }
