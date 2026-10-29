@@ -62,7 +62,7 @@ window.RA_CONTENT = {
       { id: 'mystery', label: 'Mystery Shopping',               x: 'h',  y: 'vl', px: 70, py: 11, side: 'left' },
       { id: 'contact', label: 'Contact Center / Complaints',    x: 'h',  y: 'l',  px: 70, py: 28, side: 'left' },
       { id: 'social',  label: 'Social Media / Public Comments', x: 'm',  y: 'h',  px: 50, py: 64, side: 'right' },
-      { id: 'google',  label: 'Google Maps Reviews',            x: 'm',  y: 'vh', px: 50, py: 84, pxEnhanced: 80, xEnhanced: 'hvh', side: 'top' }
+      { id: 'google',  label: 'Google Maps Reviews',            x: 'm',  y: 'vh', px: 50, py: 80, pxEnhanced: 80, xEnhanced: 'hvh', side: 'top' }
     ],
     modes: [
       {
@@ -79,6 +79,8 @@ window.RA_CONTENT = {
       }
     ],
     enhancedTag: '+ Astara Intelligence',
+    reviewsWord: 'Reviews',          // shown next to the Google Maps logo
+    rawTag: 'Raw',                   // marks where Google Reviews started
     footer: "Internal feedback helps Mitsubishi improve today's experience. Public feedback can also influence tomorrow's customers."
   },
 

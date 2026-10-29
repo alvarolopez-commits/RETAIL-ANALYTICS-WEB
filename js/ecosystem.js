@@ -19,7 +19,9 @@
       const points = U.sources.map((s, i) => `
         <li class="eco-pt ${s.id} ${s.side || ''}" style="--x:${s.px};--y:${s.py};--x2:${s.pxEnhanced || s.px}">
           <i class="dot" aria-hidden="true"></i>
-          <span class="lb"><span data-t="understand.sources.${i}.label">${esc(s.label)}</span>${s.pxEnhanced ? `<em class="plus" data-t="understand.enhancedTag">${esc(U.enhancedTag)}</em>` : ''}</span>
+          <span class="lb">${s.pxEnhanced
+            ? `<span class="gm-pill" aria-hidden="true"><img src="assets/logos/google-maps.png" alt=""><b data-t="understand.reviewsWord">${esc(U.reviewsWord)}</b></span><span class="sr" data-t="understand.sources.${i}.label">${esc(s.label)}</span><em class="plus" data-t="understand.enhancedTag">${esc(U.enhancedTag)}</em>`
+            : `<span data-t="understand.sources.${i}.label">${esc(s.label)}</span>`}</span>
           <span class="sr"><span data-t="understand.axisX">${esc(U.axisX)}</span>: <span class="m0 m-any" data-t="understand.levels.${s.x}"></span><span class="m1" data-t="understand.levels.${s.xEnhanced || s.x}"></span>.
             <span data-t="understand.axisY">${esc(U.axisY)}</span>: <span data-t="understand.levels.${s.y}"></span>.</span>
         </li>`).join('');
@@ -28,6 +30,7 @@
         <div class="eco-yaxis" aria-hidden="true"><span data-t="understand.high">${esc(U.high)}</span><b data-t="understand.axisY">${esc(U.axisY)}</b><span data-t="understand.low">${esc(U.low)}</span></div>
         <div class="eco-plot">
           <i class="eco-ghost" style="--x:${g.px};--y:${g.py}" aria-hidden="true"></i>
+          <em class="eco-ghost-lb" style="--x:${g.px};--y:${g.py}" aria-hidden="true" data-t="understand.rawTag">${esc(U.rawTag)}</em>
           <i class="eco-trail" style="--x:${g.px};--y:${g.py};--w:${g.pxEnhanced - g.px}" aria-hidden="true"></i>
           <ul class="eco-points" aria-label="${esc(U.axisX)} / ${esc(U.axisY)}">${points}</ul>
         </div>

@@ -99,6 +99,8 @@ Object.assign(window.RA_I18N.id, {
   'understand.modes.1.chips.2': 'Peringatan',
   'understand.modes.1.chips.3': 'Pemantauan dealer',
   'understand.enhancedTag': '+ Astara Intelligence',
+  'understand.reviewsWord': 'Ulasan',
+  'understand.rawTag': 'Mentah',
   'understand.footer': 'Masukan internal membantu Mitsubishi memperbaiki pengalaman hari ini. Masukan publik juga dapat memengaruhi pelanggan di masa depan.',
 
   'methodology.title': 'Dari Ulasan menjadi Kecerdasan Ritel',
