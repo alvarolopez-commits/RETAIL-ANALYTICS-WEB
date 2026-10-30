@@ -158,3 +158,9 @@ Object.assign(window.RA_I18N.id, {
   'methodology.outputs.2.label': 'Pelaporan',
   'methodology.outputs.2.text': 'Pelaporan berkala untuk dealer dan tim merek.'
 });
+
+/* cover */
+Object.assign(window.RA_I18N.id, {
+  'cover.headline': 'Ubah masukan pelanggan menjadi keputusan ritel yang lebih cerdas.',
+  'cover.cta': 'Mulai'
+});

@@ -8,7 +8,7 @@
 
 
   /* ── scenes ── */
-  const ORDER = ['search', 'understand', 'methodology', 'respond', 'improve', 'repeat', 'end'];   // the deck opens on SEARCH; 'end' belongs to REPEAT
+  const ORDER = ['cover', 'search', 'understand', 'methodology', 'respond', 'improve', 'repeat', 'end'];   // the cover waits for "Start"; 'end' belongs to REPEAT
   const scenes = {};
   ORDER.forEach(id => { scenes[id] = { id, el: $('scene-' + id), count: 1, ctrl: null }; });
 
@@ -50,7 +50,7 @@
     $('play').disabled = !s.isAct;   // keeps its place (no layout shift); only visible inside the acts
 
     const live = $('live');
-    live.textContent = s.ctrl ? s.ctrl.label(idx) : ({ repeat: C.closing.headline, end: C.end.lead + ' ' + C.end.em }[cur] || '');
+    live.textContent = s.ctrl ? s.ctrl.label(idx) : ({ cover: C.cover.headline, repeat: C.closing.headline, end: C.end.lead + ' ' + C.end.em }[cur] || '');
 
     try { history.replaceState(null, '', '#' + cur + (s.count > 1 && idx ? '/' + (idx + 1) : '')); } catch (e) { /* file:// quirks */ }
   }
@@ -194,14 +194,14 @@
         clearAuto(); if (!tooSoon()) next(); break;
       case 'f': case 'F': e.preventDefault(); toggleFs(); break;
       case 'p': case 'P': if (scenes[cur].isAct) { e.preventDefault(); setAuto(!auto); } break;
-      case 'Home': e.preventDefault(); RA.go('search'); break;
+      case 'Home': e.preventDefault(); RA.go('cover'); break;
       case '1': RA.go('search'); break;
       case '2': RA.go('understand'); break;
       case '3': RA.go('methodology'); break;
       case '4': RA.go('respond'); break;
       case '5': RA.go('improve'); break;
       case '6': RA.go('repeat'); break;
-      case '0': RA.go('search'); break;
+      case '0': RA.go('cover'); break;
       case 'l': case 'L': RA.setLang(RA.lang() === 'en' ? 'id' : 'en'); break;
     }
   });
@@ -223,7 +223,7 @@
   function fromHash() {
     const m = location.hash.replace('#', '').match(/^([a-z]+)(?:\/(\d+))?$/);
     if (m && scenes[m[1]]) return [m[1], m[2] ? +m[2] - 1 : 0];
-    return ['search', 0];
+    return ['cover', 0];
   }
   window.addEventListener('hashchange', () => { const [id, i] = fromHash(); if (id !== cur || (scenes[id].count > 1 && i !== idx)) { clearAuto(); show(id, i); } });
 

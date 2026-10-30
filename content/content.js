@@ -25,6 +25,12 @@ window.RA_CONTENT = {
   /* Beat auto-play toggle in the nav bar (never crosses from one ACT to the next). */
   autoplay: { defaultOn: false },
 
+  /* Cover: the deck waits here until "Start" (so the first video never starts by itself). */
+  cover: {
+    headline: 'Turn customer feedback into smarter retail decisions.',
+    cta: 'Start'
+  },
+
   /* ─────────── v0.2 · Research evidence shown inside SEARCH (HTML cards above the videos) ───────────
      Scope is part of the claim: both figures come from US surveys. Neither describes Indonesia or Google Maps use alone.
      Sources: CDK chart (p. 8) https://impel.ai/wp-content/uploads/2025/11/CDK_2025-service-shopper-study.pdf
@@ -166,7 +172,7 @@ window.RA_CONTENT = {
           kb: { x: 1.2, y: -0.4 },
           overlay: [
             { type: 'maps', mode: 'search', at: 700, switch: [{ at: 3600, mode: 'compare' }] },
-            { type: 'evidence', id: 'cdk', at: 4400, until: 7700 }          // 51% once the ratings are readable
+            { type: 'evidence', id: 'brightlocal', at: 4400 }               // 74%: once the ratings are readable; stays to the end of the clip
           ]
         },
         {
@@ -179,7 +185,7 @@ window.RA_CONTENT = {
           kb: { x: -1, y: -0.6 },
           overlay: [
             { type: 'maps', mode: 'compare', at: 500, switch: [{ at: 5400, mode: 'select' }] },
-            { type: 'evidence', id: 'brightlocal', at: 800, until: 5000 }   // 74% while he weighs the options, gone before the chosen-dealer callout
+            { type: 'evidence', id: 'cdk', at: 800 }                        // 51%: while he weighs the options; stays to the end of the clip
           ]
         },
         {

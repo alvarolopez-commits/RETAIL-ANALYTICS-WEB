@@ -2,7 +2,7 @@
 
 Static, dependency-free web presentation (16:9, fluid). Six chapters: **SEARCH · UNDERSTAND · METHODOLOGY · RESPOND · IMPROVE · REPEAT.**
 The customer-experience cycle itself stays **Search. Respond. Improve. Repeat.** (UNDERSTAND and METHODOLOGY explain it, they are not steps of it).
-The deck opens directly on the first SEARCH video (no intro screen). Previous version: git tag `v0.1`.
+The deck opens on a **cover** (logo, headline, **Start** button): no video plays until Start is pressed. The cover is not a chapter. Previous versions: git tags `v0.1`, `v0.2`.
 Independent project; the PCI deck was used only as a visual/technical reference and is untouched.
 
 ## Run locally
@@ -31,7 +31,7 @@ All paths are relative and `.nojekyll` is included, so the folder can be publish
 | Action | Input |
 |---|---|
 | Next / previous beat | `→` `Space` `Enter` click · `←` · nav arrows · swipe |
-| Jump to chapter | nav chapters, or keys `1` Search · `2` Understand · `3` Methodology · `4` Respond · `5` Improve · `6` Repeat · `0`/`Home` Search |
+| Jump to chapter | nav chapters, or keys `1` Search · `2` Understand · `3` Methodology · `4` Respond · `5` Improve · `6` Repeat · `0`/`Home` Cover |
 | Full screen | `F` / button |
 | Language | `EN` / `ID` in the bar, or `L` (remembered on this device). Link straight to Indonesian with `?lang=id` |
 | Auto-play beats (inside an act only, never crosses acts) | `P` / ▶ button |
@@ -39,7 +39,7 @@ All paths are relative and `.nojekyll` is included, so the folder can be publish
 | METHODOLOGY | `→`/`←` or click a stage (COLLECT · CLASSIFY · MEASURE · ACT) |
 | IMPROVE views | `→`/`←` walk through the six views; hover a view to jump to it; click the capture (or a view) to enlarge · `Esc` closes, `←/→` move inside the enlarged view |
 
-Deep links: `#search/2`, `#understand` (`#understand/2` = with Astara), `#methodology/3`, `#respond/4`, `#improve/4`, `#repeat`, `#end` (brand card, part of REPEAT). Old `#intro` links open SEARCH.
+Deep links: `#search/2`, `#understand` (`#understand/2` = with Astara), `#methodology/3`, `#respond/4`, `#improve/4`, `#repeat`, `#end` (brand card, part of REPEAT). `#search` skips the cover; no hash or an old `#intro` opens the cover.
 
 ## Structure
 
@@ -67,9 +67,10 @@ Raw clips live in `../IMAGENES Y BRUTOS/` (untouched); the deck uses web copies 
 
 | Slide | Clip | Length | What happens | Text over the clip (English) | Layer (HTML, Bahasa) |
 |---|---|---|---|---|---|
+| COVER | – | – | Logo lockup, "Turn customer feedback into smarter retail decisions.", **Start** (only the button starts the deck; background clicks do nothing; → / Space / Enter also continue) | – | – |
 | SEARCH 1 | `00 search` → `search_01_opening` | 8 s | Café with a Mitsubishi dealership across the street; he searches, smiles and turns the phone to the camera. Opens the deck | Title card on the right (clear of his face; stacked at the top in portrait) until 4.2 s: **Every review shapes your next customer.** + Google Maps logo (then the compact SEARCH tag); caption: The journey starts before the showroom. | none |
-| SEARCH 2 | `1-02` → `search_02_maps` | 8 s | Scrolls the dealer list | 0 s: The search begins on Google Maps. → 3.6 s: Every rating shapes a first impression. | Maps card: search → compare (4,3 / 3,6 / 3,8) at 3.6 s · **51%** card 4.4–7.7 s |
-| SEARCH 3 | `1-03` → `search_03_decision` | 8 s | Weighs it, smiles, decides | Trust influences the choice. | **74%** card 0.8–5.0 s · Maps card: compare → chosen dealer at 5.4 s |
+| SEARCH 2 | `1-02` → `search_02_maps` | 8 s | Scrolls the dealer list | 0 s: The search begins on Google Maps. → 3.6 s: Every rating shapes a first impression. | Maps card: search → compare (4,3 / 3,6 / 3,8) at 3.6 s · **74%** card from 4.4 s, stays to the end |
+| SEARCH 3 | `1-03` → `search_03_decision` | 8 s | Weighs it, smiles, decides | Trust influences the choice. | **51%** card from 0.8 s, stays to the end · Maps card: compare → chosen dealer at 5.4 s |
 | SEARCH 4 | `1-04` → `search_04_visit` | 8 s | Walks up to the showroom | 0 s: Reputation influences where customers go. → 5.2 s: Every visit can leave a review. | Two reviews appear at 5.5 s |
 | RESPOND 1 | `2-01` → `respond_01_alert` | 8 s | Works, phone lights up, picks it up | 0 s: Every morning, reputation needs attention. → 3.2 s: A negative review is detected. | Email notification at 3.4 s |
 | RESPOND 2 | `2-02` → `respond_02_report` | 6 s | First-person view of the daily email | The right information, at the right time. | Readable email card at 0.6 s |
@@ -87,7 +88,7 @@ The stills from the first handoff were removed (all of SEARCH is now video).
 
 ## Research evidence (SEARCH)
 
-Two HTML cards above the videos (never baked into the MP4), data in `content.js` → `evidence`, timing in the beat's `overlay` array (`{type:'evidence', id, at, until}`).
+Two HTML cards above the videos (never baked into the MP4), data in `content.js` → `evidence`, timing in the beat's `overlay` array (`{type:'evidence', id, at}`). **Slide 2 shows the 74% (BrightLocal) and slide 3 the 51% (CDK); each appears and stays until its clip ends.** Add `until: ms` to a card to make it fade out again.
 
 | Card | Figure | Scope shown on the card | Source |
 |---|---|---|---|

@@ -13,6 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+<link rel="preload" as="image" href="assets/images/bg/flow-01.webp">
 <link rel="preload" as="image" href="assets/images/posters/search_01_opening.jpg">
 <link rel="stylesheet" href="css/tokens.css">
 <link rel="stylesheet" href="css/presentation.css">
@@ -22,11 +23,30 @@
 </head>
 <body>
 
-<div id="stage" data-scene="search">
+<div id="stage" data-scene="cover">
   <!-- Atmosphere -->
   <div id="aura" aria-hidden="true"><i></i><i></i><i></i></div>
 
   <main id="scenes">
+
+    <!-- ───────────── COVER: waits for "Start" ───────────── -->
+    <section class="scene s-cover" id="scene-cover" data-scene="cover" data-noadvance aria-label="Cover">
+      <div class="bgfx" aria-hidden="true"></div>
+      <div class="cv-inner">
+        <div class="cv-lockup" aria-label="Retail Analytics by Astara Intelligence">
+          <div class="cv-logo"><img src="assets/logos/astara-ra.svg" alt=""><span class="sweep"></span></div>
+          <div class="cv-txt">
+            <span class="cv-name">Retail Analytics</span>
+            <span class="cv-by"><span>by</span><img src="assets/logos/astara-intelligence-white.svg" alt="Astara Intelligence"></span>
+          </div>
+        </div>
+        <h1 class="cv-h" data-t="cover.headline">Turn customer feedback into smarter retail decisions.</h1>
+        <button class="cta" id="startCta" data-go="search">
+          <span data-t="cover.cta">Start</span>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
+        </button>
+      </div>
+    </section>
 
     <!-- ───────────── ACT 01 / ACT 02 — filled from content.js (SEARCH opens the presentation) ───────────── -->
     <section class="scene s-act" id="scene-search"  data-scene="search"  aria-label="Search"></section>
@@ -135,7 +155,7 @@
 
   <!-- Chapter bar -->
   <nav id="nav" aria-label="Presentation navigation">
-    <button class="brand" data-go="search" aria-label="Retail Analytics, back to the start">
+    <button class="brand" data-go="cover" aria-label="Retail Analytics, back to the cover">
       <img class="bm-ra" src="assets/logos/astara-ra.svg" alt="">
       <span class="bm-txt"><b>Retail Analytics</b><span class="bm-by"><i>by</i><img src="assets/logos/astara-intelligence-white.svg" alt="Astara Intelligence"></span></span>
     </button>
